@@ -1,0 +1,24 @@
+{
+  "name": "gigit",
+  "version": "1.0.0",
+  "description": "Gig managing app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erikawhiteshoes/GigIt.git"
+  },
+  "author": "Erika Johnson",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/erikawhiteshoes/GigIt/issues"
+  },
+  "homepage": "https://github.com/erikawhiteshoes/GigIt#readme",
+  "dependencies": {
+    "express": "^4.14.0",
+    "lodash": "^4.16.4",
+    "nedb": "^1.8.0"
+  }
+}
