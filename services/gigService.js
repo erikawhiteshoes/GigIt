@@ -23,6 +23,8 @@ function onLoadDb(name){
 gigs.loadDatabase(onLoadDb('gigs'));
 venues.loadDatabase(onLoadDb('venues'));
 
+
+}
 function allGigs(cb){
   gigs.find({}, (err, gigs) =>
   {
@@ -30,6 +32,15 @@ function allGigs(cb){
     cb(err, gigs)
   })
 }
+
+gigService.addGig( {
+  venue_id : 1,
+  name : "new gig",
+  // etc.
+  }, function(err, gig) {
+     /* call back once gig is added */
+  }
+);
 
 module.exports = {
   allGigs
