@@ -1,13 +1,9 @@
 const Datastore = require('nedb');
 const path = require('path');
 
-// renamed db to gigs
 const gigs = new Datastore({ filename: path.join(__dirname, 'gigs.db')});
 const venues = new Datastore({ filename: path.join(__dirname, 'venues.db')});
 
-// this is a higher order function. Given a name as a string
-// it returns a call back for logging success/failure of loading a collection
-// we will have a few collections and only want to write this code once.
 function onLoadDb(name){
   return function(err){
     if(err){
@@ -23,8 +19,6 @@ function onLoadDb(name){
 gigs.loadDatabase(onLoadDb('gigs'));
 venues.loadDatabase(onLoadDb('venues'));
 
-
-}
 function allGigs(cb){
   gigs.find({}, (err, gigs) =>
   {
@@ -33,15 +27,49 @@ function allGigs(cb){
   })
 }
 
-gigService.addGig( {
-  venue_id : 1,
-  name : "new gig",
-  // etc.
-  }, function(err, gig) {
-     /* call back once gig is added */
-  }
-);
+function newGig(obj, cb){ // cb: function(err, insertedGig)
+  //todo: add validation
+  let gig = {name: obj.name,paid: obj.paid,fee: obj.fee }
 
+  // example validation
+  if(!gig.name) {
+    cb("name not set, stupid")
+    return
+  }
+  gigs.insert(gig, cb)
+}
+
+function allVenues(cb){
+  venues.find({}, (err, venues) =>
+  {
+    console.dir({err, venues})
+    cb(err, venues)
+  })
+}
+
+function newVenue(obj, cb){ // cb: function(err, insertedVenue)
+  //todo: add validation
+  let venue = {name: obj.name, street1: obj.street1, street2: obj.street2, city: obj.city, state: obj.state, zip: obj.zip }
+
+  // example validation
+  if(!venue.name) {
+    cb("name not set, stupid")
+    return
+  }
+  venues.insert(venue, cb)
+}
+
+function newGAndV(gobj, vobj, cb){ // cb: function(err, insertedVenue)
+  //todo: add validation
+  let v = {name: vobj.name, street1: vobj.street1, street2: vobj.street2, city: vobj.city, state: vobj.state, zip: vobj.zip }
+  let g = {name: gobj.name,paid: gobj.paid,fee: gobj.fee }
+
+  venues.insert(v, function(err, venue) {
+    gigs.insert(g, function(err, gig){
+      cb(null, {gig:gig, venue:venue})
+    })
+  })
+}
 module.exports = {
-  allGigs
+  allGigs, newGig, allVenues, newVenue, newGAndV
 };

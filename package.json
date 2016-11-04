@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/erikawhiteshoes/GigIt#readme",
   "dependencies": {
+    "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "lodash": "^4.16.4",
     "nedb": "^1.8.0"
