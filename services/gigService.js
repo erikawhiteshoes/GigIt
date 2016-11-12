@@ -27,6 +27,20 @@ function allGigs(cb){
   })
 }
 
+function findGigById(id, cb) {
+  gigs.findOne({_id: id}, (err, gig) => {
+    if(err) {console.error(err)}
+    cb(err, gig)
+  })
+}
+
+function removeById(id, cb) {
+  gigs.remove({_id: id}, (err, gig) => {
+    if(err) {console.error(err)}
+    cb(err, gig)
+  })
+}
+
 function newGig(obj, cb){ // cb: function(err, insertedGig)
   //todo: add validation
   let gig = {name: obj.name,paid: obj.paid,fee: obj.fee }
@@ -71,5 +85,5 @@ function newGAndV(gobj, vobj, cb){ // cb: function(err, insertedVenue)
   })
 }
 module.exports = {
-  allGigs, newGig, allVenues, newVenue, newGAndV
+  allGigs, newGig, allVenues, newVenue, newGAndV, findGigById, removeById
 };

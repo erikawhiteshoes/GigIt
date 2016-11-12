@@ -1,5 +1,6 @@
 # GigIt
 
-An express.js gig tracking and managing app using JavaScript and neDB which can be upgraded to MongoDB when necessary.  
-
-I wanted something to help me more easily log data needed for tax preparation since many boxed products do not fit my needs.
+A web application to track and manage professional music gigs.	                                 In progress
+•	Node.js and Express backend.
+•	Key-Value Database layer using NeDB, based on Mongo
+•	Ajax SPA front end, under development with React

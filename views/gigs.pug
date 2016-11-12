@@ -1,0 +1,16 @@
+html.no-js(lang='en')
+    head
+        meta(charset='utf-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1.0')
+        title refactorized blog
+    body
+      table
+        tr
+          th name
+          th fee
+          th paid
+        each gig in gigs
+          tr
+            td: a(href=`api/gigs/view/${gig._id}`) #{gig.name}
+            td #{gig.fee}
+            td #{gig.paid}

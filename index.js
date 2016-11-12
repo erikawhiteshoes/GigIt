@@ -5,6 +5,8 @@ const gigRouter = express.Router();
 const gigService = require('./services/gigService.js');
 const bodyParser = require('body-parser');
 
+app.set('view engine', 'pug')
+
 // configure app to use bodyParser()
 // this will let us get the data from a POST
 app.use(bodyParser.urlencoded({extended: true}));
@@ -18,11 +20,13 @@ app.use(bodyParser.urlencoded({extended: true}));
 //
 // app.use('/api/gigs', gigRouter);
 
+//Prints request url
 app.use(function(req,res,next){
   console.log(req.url);
   next();
 });
 
+//Allows objects to be inserted into gig and venue dbs with single submit
 app.post('/web/gandv', function (req, res) {
   let body = req.body;
   let g = body.gig;
@@ -32,6 +36,7 @@ app.post('/web/gandv', function (req, res) {
   })
 })
 
+//Displays all gigs
 app.get('/api/gigs', (req,res) => {
   gigService.allGigs((err, gigs) => {
     //todo: use node style err cb
@@ -41,6 +46,15 @@ app.get('/api/gigs', (req,res) => {
   })
 });
 
+app.get('/gigs', (req,res) => {
+  gigService.allGigs((err, gigs) => {
+    //todo: use node style err cb
+    if(err){console.error(err)}
+    res.render('gigs', {gigs});
+  })
+});
+
+//Displays all venues
 app.get('/api/venues', (req,res) => {
   gigService.allVenues((err, venues) => {
     //todo: use node style err cb
@@ -49,6 +63,8 @@ app.get('/api/venues', (req,res) => {
     res.send(JSON.stringify(venues));
   })
 });
+
+//Adds new venues
 app.post('/api/venues/add', (req,res) => {
   console.dir(req.body)
   let venue = req.body
@@ -56,9 +72,30 @@ app.post('/api/venues/add', (req,res) => {
     if(err){
       console.error(err)
       res.status(501).send(err);
-}
+    }
     res.send(JSON.stringify(addedVenue));
   })
+});
+
+//allGigs is a function. Need to nest findByID within
+app.get('/api/gigs/view/:id', function(req, res) {
+      gigService.findGigById(req.params.id, function(err, gig) {
+        if (err) {
+          console.error(err)
+            res.status(500).send(err);
+        }
+        res.json(gig)
+      })
+});
+
+app.delete('/api/gigs/remove/:id', function(req, res) {
+      gigService.removeById(req.params.id, function(err, gig) {
+        if (err) {
+          console.error(err)
+            res.status(500).send(err);
+        }
+        res.json(gig)
+      })
 });
 
 app.use(express.static('public'))
