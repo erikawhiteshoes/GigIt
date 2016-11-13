@@ -21,13 +21,13 @@ app.use(bodyParser.urlencoded({extended: true}));
 // app.use('/api/gigs', gigRouter);
 
 //Prints request url
-app.use(function(req,res,next){
+app.use((req,res,next) => {
   console.log(req.url);
   next();
 });
 
 //Allows objects to be inserted into gig and venue dbs with single submit
-app.post('/web/gandv', function (req, res) {
+app.post('/web/gandv', (req, res) => {
   let body = req.body;
   let g = body.gig;
   let v = body.venue;
@@ -77,8 +77,8 @@ app.post('/api/venues/add', (req,res) => {
   })
 });
 
-//allGigs is a function. Need to nest findByID within
-app.get('/api/gigs/view/:id', function(req, res) {
+//View gigs by ID
+app.get('/api/gigs/view/:id', (req, res) => {
       gigService.findGigById(req.params.id, function(err, gig) {
         if (err) {
           console.error(err)
@@ -88,7 +88,7 @@ app.get('/api/gigs/view/:id', function(req, res) {
       })
 });
 
-app.delete('/api/gigs/remove/:id', function(req, res) {
+app.delete('/api/gigs/remove/:id', (req, res) => {
       gigService.removeById(req.params.id, function(err, gig) {
         if (err) {
           console.error(err)
