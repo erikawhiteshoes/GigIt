@@ -36,6 +36,23 @@ app.post('/web/gandv', (req, res) => {
   })
 })
 
+//Populates venue menue for new-gig
+app.get('/new-gig/', (req, res) => {
+  gigService.allVenues((err, venues) => {
+    if(err){console.error(err)}
+    res.render('new-gig', {venues})
+  })
+});
+
+app.post('/new-gig/', (req, res) => {
+  let body = req.body;
+  let g = body.gig;
+  let v = body.venue;
+  gigService.newGAndV(g, v, (err, obj) =>  {
+    res.json(obj)
+  })
+})
+
 //Displays all gigs
 app.get('/api/gigs', (req,res) => {
   gigService.allGigs((err, gigs) => {
@@ -50,7 +67,7 @@ app.get('/gigs', (req,res) => {
   gigService.allGigs((err, gigs) => {
     //todo: use node style err cb
     if(err){console.error(err)}
-    res.render('gigs', {gigs});
+    res.render('gigs', {gigs})
   })
 });
 
@@ -66,7 +83,6 @@ app.get('/api/venues', (req,res) => {
 
 //Adds new venues
 app.post('/api/venues/add', (req,res) => {
-  console.dir(req.body)
   let venue = req.body
   gigService.newVenue(venue, (err, addedVenue) => {
     if(err){
