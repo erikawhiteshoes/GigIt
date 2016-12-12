@@ -6,11 +6,17 @@ html.no-js(lang='en')
     body
       table
         tr
-          th name
-          th fee
-          th paid
+          th Name
+          th Venue Name
+          th Fee
+          th Amount Received
         each gig in gigs
           tr
             td: a(href=`api/gigs/view/${gig._id}`) #{gig.name}
+            td= (gig.venue && gig.venue.name) ? gig.venue.name : ''
             td #{gig.fee}
             td #{gig.paid}
+            th Edit
+            th: a(href='/web/api/gigs/remove/${gig._id}') Delete
+      a(href='/new-gig/')
+        button(type='button') Add Gig

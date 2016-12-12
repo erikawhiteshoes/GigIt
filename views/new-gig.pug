@@ -4,37 +4,38 @@ html
   body
     h2 Let's create a new gig!
     form(action="/new-gig/" method="post")
-      label(for='gig[name]') Gig name:
-      input(type="text", name="gig[name]")
-      br
-      label(for='gig[paid]') Paid:
-      input(type="text", name="gig[paid]")
-      br
-      label(for='gig[fee]') Fee:
-      input(type="text", name="gig[fee]")
-    h3 Select a venue
-    select
-        each venue in venues
-          ul.dropdown-menu
-            option=(value=venue.name)
-    h3 or add new Venue
-    label(for='venue[name]') Venue name:
-    input(type="text", name="venue[name]")
-    br
-    label(for='venue[street1]') Street 1:
-    input(type="text", name="venue[street1]")
-    br
-    label(for='venue[street2]') Street 2:
-    input(type="text", name="venue[street2]")
-    br
-    label(for='venue[city]') City:
-    input(type="text", name="venue[city]")
-    br
-    label(for='venue[state]') State:
-    input(type="text", name="venue[state]")
-    br
-    label(for='venue[zip]') Zipcode:
-    input(type="text", name="venue[Zip]")
-    br
-    br
-    input(type="submit")
+      div
+        label(for='gig[name]') Gig name:
+        input(type="text", name="gig[name]")
+      div
+        label(for='gig[paid]') Paid:
+        input(type="text", name="gig[paid]")
+      div
+        label(for='gig[fee]') Fee:
+        input(type="text", name="gig[fee]")
+        h3 Select a venue
+        select(name="existing_venue")
+            each venue in venues
+              ul.dropdown-menu
+                option(value=venue._id)= venue.name
+        h3 or add new Venue
+        label(for='venue[name]') Venue name:
+        input(type="text", name="venue[name]")
+      div
+        label(for='venue[street1]') Street 1:
+        input(type="text", name="venue[street1]")
+      div
+        label(for='venue[street2]') Street 2:
+        input(type="text", name="venue[street2]")
+      div
+        label(for='venue[city]') City:
+        input(type="text", name="venue[city]")
+      div
+        label(for='venue[state]') State:
+        input(type="text", name="venue[state]")
+      div
+        label(for='venue[zip]') Zipcode:
+        input(type="text", name="venue[Zip]")
+      div
+      div
+      input(type="submit")

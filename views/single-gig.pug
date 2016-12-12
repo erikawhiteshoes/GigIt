@@ -1,0 +1,17 @@
+html
+  head
+    title Single Gig
+  body
+    table
+      tr
+        th Name
+        th Venue Name
+        th Fee
+        th Amount Received
+      tr
+        td #{gig.name}
+        td= (gig.venue && gig.venue.name) ? gig.venue.name : ''
+        td #{gig.fee}
+        td #{gig.paid}
+        th Edit
+        th: a(href='/web/api/gigs/remove/${gig._id}') Delete
