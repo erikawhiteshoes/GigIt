@@ -58,7 +58,7 @@ function findGigById(id, cb) {
 }
 
 function updateGig(id, gig, cb) {
-  gigsDb.update({_id: id}, gig, {returnUpdatedDocs:true}, (err, numAffected, affectedDocuments) => {
+  gigsDb.update({_id: id}, gig, {}, (err, numAffected, affectedDocuments) => {
     if(err) {console.error(err)}
     cb(err, affectedDocuments)
   })

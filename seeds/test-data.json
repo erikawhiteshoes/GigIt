@@ -1,0 +1,11 @@
+{
+  "gigs": [
+    {"name":"Funny Thing Happened on the Way to the Forum","paid":"0","fee":"$1400","venue_id":"8Yab8nC7fsy5k47K","_id":"DCb22a4znEn4fYSS"},
+    {"name":"Christmas Mass","paid":"3","fee":"$2000","venue_id":"FvWzkzkm9VLwiKsm","_id":"did33jdo03i"}
+  ],
+
+  "venues": [
+    {"name":"American University-Greenberg Hall","city":"Washington","state":"DC","zip":"98501","_id":"8Yab8nC7fsy5k47K"},
+    {"name":"Cathedral of Mary or Queen","city":"Baltimore","state":"MD","zip":"98501","_id":"FvWzkzkm9VLwiKsm"}
+  ]
+}

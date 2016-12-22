@@ -101,14 +101,14 @@ app.get('/web/api/gigs/view/:id', (req, res) => {
 })
 
 //Update gigs by ID
-app.put('/web/api/gigs/view/:id', (req, res) => {
+app.put('/web/api/gigs/update/:id', (req, res) => {
   let gigId = req.params.id
-  let updatedGig = req.body.data
+  let updatedGig = req.body
   gigService.updateGig(gigId, updatedGig, (err, gig) => {
     if(err) {
       res.send(err)
     }
-//    res.send(JSON.stringify(updatedGig))
+      res.send(JSON.stringify(updatedGig))
   })
 })
 
