@@ -23,7 +23,13 @@ describe ('gigService', function() {
   })
   describe ('Inserting Gigs', function(){
     it('Should insert gigs', () => {
-      
+      svc.newGAndV((err, docs) => {
+        if(err) {
+          throw err
+        } else {
+          assert.isAbove()
+        }
+      })
     })
 
   })
